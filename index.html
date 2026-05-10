@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fixerly - The Neighborhood Hub for Getting It Working</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Libre+Baskerville&display=swap" rel="stylesheet" />
+  <style>
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background-color: #F4ECD8; /* Warm cream */
+      color: #4A3728; /* Warm sepia text */
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1,h2,h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      color: #6B2D3E; /* Deep burgundy */
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      letter-spacing: 0.03em;
+    }
+
+    p {
+      max-width: 520px;
+      margin: 0 auto 1.5rem;
+      color: #4A3728;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    a.button-primary {
+      display: inline-block;
+      background-color: #6B2D3E; /* Deep Burgundy */
+      color: #F4ECD8; /* Warm cream text */
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding: 0.75rem 2.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      box-shadow: 0 0 4px rgba(107, 45, 62, 0.35);
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    a.button-primary:hover,
+    a.button-primary:focus {
+      background-color: #552534;
+      outline: none;
+      box-shadow: 0 0 8px rgba(107, 45, 62, 0.6);
+    }
+
+    hr.thick-rule {
+      border: none;
+      border-top: 4px solid #6B2D3E;
+      margin: 2rem auto;
+      width: 80px;
+    }
+
+    main.container {
+      flex-grow: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    form {
+      background: #fffdfa;
+      padding: 1.75rem 2rem;
+      border-radius: 4px;
+      box-shadow: inset 0 1px 4px rgba(74, 55, 40, 0.15);
+      max-width: 480px;
+      margin: 1rem auto 0;
+      font-size: 1rem;
+      font-family: 'Lato', sans-serif;
+      color: #4A3728;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: #6B2D3E;
+    }
+
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid #6B2D3E;
+      border-radius: 4px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: #4A3728;
+      margin-bottom: 1.25rem;
+      background: #fffdfa;
+      box-shadow: inset 0 0 3px rgba(74, 55, 40, 0.1);
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+      border-color: #6B2D3E;
+      outline: none;
+      box-shadow: 0 0 5px #6B2D3E;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      background-color: #6B2D3E;
+      color: #F4ECD8;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      box-shadow: 0 0 4px rgba(107, 45, 62, 0.35);
+    }
+
+    button:hover,
+    button:focus {
+      background-color: #552534;
+      outline: none;
+      box-shadow: 0 0 8px rgba(107, 45, 62, 0.6);
+    }
+
+    .form-success,
+    .form-error {
+      text-align: center;
+      font-weight: 600;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    .form-success {
+      color: #1B4332; /* Forest Green from brand as success */
+    }
+
+    .form-error {
+      color: #FFB703; /* Solder Gold from brand as error highlight */
+    }
+
+    /* No-Go List styling */
+    .no-go-list {
+      background: #F4ECD8;
+      border-left: 6px solid #FFB703; /* Solder Gold */
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      max-width: 480px;
+      margin: 1rem auto 0;
+      font-family: 'Lato', sans-serif;
+      color: #6B2D3E;
+      line-height: 1.4;
+      box-shadow: inset 0 0 6px rgba(255, 183, 3, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      main.container {
+        padding: 1rem 1rem 3rem;
+      }
+
+      form {
+        padding: 1rem 1rem 1.5rem;
+      }
+
+      a.button-primary {
+        padding: 0.6rem 1.8rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <header>
+      <h1>Fixerly</h1>
+      <p>The Neighborhood Hub for Getting It Working</p>
+      <a href="#repair-request" class="button-primary">Request a Repair</a>
+      <a href="#volunteer-signup" class="button-primary" style="margin-left: 1rem; background-color: #2C3E50;">Volunteer Signup</a>
+    </header>
+    <hr class="thick-rule" />
+
+    <section id="intro">
+      <h2>Welcome to Fixerly</h2>
+      <p>Your local community repair cafe, powered by neighbor volunteers who fix electronics and clothes for free. Join us every Saturday at the Public Library or the Neighborhood Coffee Shop.</p>
+    </section>
+
+    <section id="repair-request">
+      <h2>Request a Repair</h2>
+      <p>Fill out the form below to submit your repair request. Upload 2 photos and a description — our Master Fixers will review it in advance to ensure it's safe and feasible.</p>
+      <form id="repair-form" method="POST">
+        <label for="item_type">Item Type</label>
+        <select id="item_type" name="item_type" required>
+          <option value="">Select an item type</option>
+          <option value="Small Electronics">Small Electronics (coffee maker, lamp)</option>
+          <option value="Textiles/Clothing">Textiles/Clothing</option>
+          <option value="Laptops/Tablets">Laptops/Tablets</option>
+          <option value="Furniture">Furniture</option>
+        </select>
+
+        <label for="description">Description of Issue</label>
+        <textarea id="description" name="description" placeholder="Describe the problem or damage" required></textarea>
+
+        <label for="photo1">Photo 1 URL</label>
+        <input type="text" id="photo1" name="photo1" placeholder="Link to photo of item or damage" required />
+
+        <label for="photo2">Photo 2 URL</label>
+        <input type="text" id="photo2" name="photo2" placeholder="Link to additional photo (optional)" />
+
+        <button type="submit">Submit Repair Request</button>
+        <p id="repair-form-feedback" aria-live="polite"></p>
+      </form>
+
+      <div class="no-go-list" aria-label="Prohibited items list">
+        <h3>Prohibited Items</h3>
+        <ul>
+          <li>Microwaves and high-voltage appliances</li>
+          <li>Petrol tools and combustion engines</li>
+          <li>Items containing asbestos or lead-acid batteries</li>
+          <li>Safety equipment like car seats or helmets</li>
+          <li>Items still under manufacturer warranty</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="volunteer-signup">
+      <h2>Volunteer Signup</h2>
+      <p>Join our community of skilled neighbors. Whether you're a retired engineer, a sewing expert, or just eager to help, we welcome your involvement.</p>
+      <form id="volunteer-form" method="POST">
+        <label for="vol_name">Full Name</label>
+        <input type="text" id="vol_name" name="name" placeholder="Your full name" required />
+
+        <label for="vol_skills">Skill Set</label>
+        <input type="text" id="vol_skills" name="skill_set" placeholder="Soldering, Sewing, Software, General/Admin" required />
+
+        <label for="vol_availability">Availability</label>
+        <input type="text" id="vol_availability" name="availability" placeholder="Days and times you can volunteer" required />
+
+        <button type="submit">Join as Volunteer</button>
+        <p id="volunteer-form-feedback" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <hr class="thick-rule" />
+
+    <section id="footer" style="text-align: center; font-size: 0.9rem; color: #6B2D3E; padding-top: 1rem;">
+      &copy; 2026 Fixerly - Neighborhood Repair Cafe
+    </section>
+  </main>
+
+  <script>
+    const dbUrl = "https://app.baget.ai/api/public/databases/e0d1e03c-43eb-4ecc-9080-7ebe45e13386/rows";
+
+    // Repair Request Form Handler
+    document.getElementById('repair-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const itemType = document.getElementById('item_type').value.trim();
+      const description = document.getElementById('description').value.trim();
+
+      if (!itemType || !description) {
+        setFeedback('repair-form-feedback', 'Please fill in all required fields.', false);
+        return;
+      }
+
+      const data = {
+        data: {
+          repair_requests_item_type: itemType,
+          repair_requests_description: description,
+          repair_requests_status: 'pending'
+        }
+      };
+
+      try {
+        const response = await fetch(dbUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          setFeedback('repair-form-feedback', 'Thank you! Your repair request has been submitted.', true);
+          e.target.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        setFeedback('repair-form-feedback', 'Sorry, there was an error submitting your request. Please try again.', false);
+      }
+    });
+
+    // Volunteer Signup Form Handler
+    document.getElementById('volunteer-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('vol_name').value.trim();
+      const skillSet = document.getElementById('vol_skills').value.trim();
+      const availability = document.getElementById('vol_availability').value.trim();
+
+      if (!name || !skillSet || !availability) {
+        setFeedback('volunteer-form-feedback', 'Please fill in all required fields.', false);
+        return;
+      }
+
+      const data = {
+        data: {
+          volunteers_name: name,
+          volunteers_skill_set: skillSet,
+          volunteers_availability: availability
+        }
+      };
+
+      try {
+        const response = await fetch(dbUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          setFeedback('volunteer-form-feedback', 'Thank you for signing up as a volunteer!', true);
+          e.target.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        setFeedback('volunteer-form-feedback', 'Error submitting signup. Please try again.', false);
+      }
+    });
+
+    function setFeedback(id, message, success) {
+      const el = document.getElementById(id);
+      el.textContent = message;
+      el.className = success ? 'form-success' : 'form-error';
+    }
+  </script>
+</body>
+</html>
